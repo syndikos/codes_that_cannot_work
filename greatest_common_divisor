@@ -1,0 +1,31 @@
+#this is the code that cannot work
+
+def gcd(a, b):
+    result = min(a, b)
+    bigger = max(a, b)
+    if bigger % result == 0:
+        return result
+    else:
+        while result > 0:
+            if a % result != 0 or b % result != 0:
+                result -= 1
+            #else:
+    return result
+                
+                
+                
+                
+#this is the code that can work
+
+def gcd(a, b):
+    result = min(a, b)
+    bigger = max(a, b)
+    if bigger % result == 0:
+        return result
+    else:
+        while result > 0:
+            if a % result != 0 or b % result != 0:
+                result -= 1
+            else:
+                return result
+                
