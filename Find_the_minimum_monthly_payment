@@ -1,0 +1,59 @@
+# -*- coding: utf-8 -*-
+"""
+Spyder Editor
+
+This is a temporary script file.
+"""
+balance = 32000
+annualInterestRate = 0.2
+monthlyInterestRate = annualInterestRate / 12.0
+minMonthlyPayment = balance / 12.0
+maxMonthlyPayment = (balance * (1 + monthlyInterestRate)**12) /12
+monthlyPayment = 0
+
+updateBalance = 1
+epsilon = 0.01
+
+def update(monthlyPayment):
+    updateBalance = balance
+    for month in range(1, 13):
+        monthlyUnpaidBalance = updateBalance - monthlyPayment
+        monthlyInterest = monthlyUnpaidBalance * monthlyInterestRate
+        updateBalance = monthlyUnpaidBalance + monthlyInterest
+    return updateBalance
+
+def goodEnough(monthlyPayment):
+	if update(monthlyPayment) <= 0 and abs(update(monthlyPayment)) < epsilon:
+		return True
+	else:
+		return False
+
+
+def improve(monthlyPayment):
+	def tooBig(monthlyPayment):
+		return update(monthlyPayment) < 0 and abs(update(monthlyPayment)) >= epsilon
+
+	def tooSmall(monthlyPayment):
+		return update(monthlyPayment) > 0
+	
+	if tooBig(monthlyPayment):
+		monthlyPayment = (minMonthlyPayment + monthlyPayment) / 2
+
+	elif tooSmall(monthlyPayment):
+		monthlyPayment = (maxMonthlyPayment + monthlyPayment) /2
+	return monthlyPayment
+#newMonthlyPayment = 0
+
+def toFind(monthlyPayment):                                           #this fuction leads to infinite loop. 
+    if not goodEnough(monthlyPayment):
+                 monthlyPayment = improve(monthlyPayment)
+                 return toFind(monthlyPayment)
+    else:
+         return monthlyPayment
+	
+ 
+
+theMonthlyPayment = toFind(monthlyPayment)
+
+
+print('Lowest Payment:', theMonthlyPayment)	
