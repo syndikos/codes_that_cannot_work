@@ -1,0 +1,19 @@
+tolerance = 0.00001
+def fixedPoint(f, firstGuess):
+    def closeEnough(v1, v2):
+        return (abs(v1 -v2) < tolerance)
+    
+    def test(guess):
+        neoGuess = f(firstGuess)            #here is the problem, the right one is " neoGuess = f(guess), 
+                                            #for fixedPoint(cos, 1.0), the incorrect one will get the answer 0.5, while the 
+                                            #right answer is about 0.73. I will find out the machanism behind this bug.
+        if closeEnough(guess, neoGuess):
+            return guess
+        else:
+            return test(neoGuess)
+            
+    return test(firstGuess)
+    
+from math import cos
+
+print(fixedPoint(cos, 1.0))
