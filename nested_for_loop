@@ -1,0 +1,24 @@
+"""
+this is a function to create a list of keys which in both two dictionaries a and b.
+
+"""
+
+a = {'a' : 1, 'b' : 2, 'c' : 3}
+
+b = {'a' : 2, 'b' : 3, 'd' : 4}
+
+def common_keys(a, b):
+    keys_a = a.keys()
+    keys_b = b.keys()
+    result = []
+    for i in keys_a:
+#        if i in keys_b:
+#            result.append(i)
+        for i in keys_b:     #the problem is here, the above two commented
+                             #lines is correct, this line is incorrect. I will
+                             #think about why this line is incorrect later.
+            result.append(i)
+    return result
+    
+    
+s = common_keys(a, b)
