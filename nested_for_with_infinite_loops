@@ -1,0 +1,13 @@
+def break_up(a):
+    for i in a:
+        if type(i) == list:
+            count = a.index(i)
+            num = count
+            for j in i:
+                a.insert(num, j)
+                num += 1
+        print(a)  # here is an infinite loop
+    a.remove(i)
+                
+                
+break_up(a)
