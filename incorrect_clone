@@ -1,0 +1,38 @@
+a =  [[], 1, [], [2, 3]]
+
+def seq_insert(L1, L2, count):
+    L2.reverse()
+    for i in L2:
+        
+        L1.insert(count, i)
+    
+def break_up(a):
+    new_list = a # here is the problem, the correct one is " new_list = a[:]"
+    for i in a:
+        sub_list = i
+       
+        
+        #print(i)
+
+        if type(i) == list:
+#            print(i)
+            count = new_list.index(i)
+
+            #print('count:', count)
+##            if len(i) > 0:
+#            print(i)
+            
+            seq_insert(new_list, sub_list, count)
+#            print('i is: ', i)
+#            #print('a is: ', a)
+        new_list.remove(i)
+#            
+#            
+#        #elif type(i) == list and len(i) == 0:
+#
+    return new_list
+
+
+                
+#                
+break_up(a)
